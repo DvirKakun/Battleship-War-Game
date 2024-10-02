@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Battleship Game</title>
+    <link rel="stylesheet" href="playStyle.css" />
+    <link rel="shortcut icon" type="image/png" href="/Images/warshipIcon.png" />
+
+    <script type="module" src="play.js"></script>
+  </head>
+
+  <body>
+    <div class="layout"></div>
+    <div class="background"></div>
+    <main class="front">
+      <section class="player">
+        <div class="playerTitle">
+          <img src="/Images/playerHeadline.png" />
+        </div>
+        <div class="playerPanel panel deactive">
+          <img
+            class="computerHorizontalTargetLine horizontalTargetLine target hidden"
+          />
+          <img
+            class="computerVerticalTargetLine verticalTargetLine target hidden"
+          />
+        </div>
+      </section>
+      <section class="computer">
+        <div class="computerTitle">
+          <img src="/Images/computerHeadline.png" class="title" />
+        </div>
+        <div class="computerPanel panel">
+          <img
+            src="/Images/verticalFirstShip.png"
+            id="computerFirst"
+            class="computer-ship hidden"
+          />
+          <img
+            src="/Images/verticalSecondShip.png"
+            id="computerSecond"
+            class="computer-ship hidden"
+          />
+          <img
+            src="/Images/verticalThirdShip.png"
+            id="computerThird"
+            class="computer-ship hidden"
+          />
+          <img
+            src="/Images/verticalFourthShip.png"
+            id="computerFourth"
+            class="computer-ship hidden"
+          />
+          <img
+            src="/Images/verticalFifthShip.png"
+            id="computerFifth"
+            class="computer-ship hidden"
+          />
+          <img
+            class="playerHorizontalTargetLine horizontalTargetLine target hidden"
+          />
+          <img
+            class="playerVerticalTargetLine verticalTargetLine target hidden"
+          />
+        </div>
+      </section>
+    </main>
+
+    <div class="overlay hidden"></div>
+
+    <dialog class="winnerDialog">
+      <img id="winner" />
+      <button id="newGame">New Game</button>
+    </dialog>
+  </body>
+</html>

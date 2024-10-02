@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Battleship Game - Strategy Panel</title>
+    <link rel="stylesheet" href="strategyPanelStyle.css" />
+    <link rel="shortcut icon" type="image/png" href="/Images/warshipIcon.png" />
+    <script type="module" src="strategyPanel.js"></script>
+
+  </head>
+
+  <body>
+    <div class="layout"></div>
+    <div class="background"></div>
+    <main class="front">
+      <section class="battleships">
+        <div class="container">
+          <img
+            src="/Images/verticalFirstShip.png"
+            id="playerFirst"
+            class="player-ship"
+            draggable="true"
+          />
+          <img
+            src="/Images/verticalSecondShip.png"
+            id="playerSecond"
+            class="player-ship"
+            draggable="true"
+          />
+          <img
+            src="/Images/verticalThirdShip.png"
+            id="playerThird"
+            class="player-ship"
+            draggable="true"
+          />
+          <img
+            src="/Images/verticalFourthShip.png"
+            id="playerFourth"
+            class="player-ship"
+            draggable="true"
+          />
+          <img
+            src="/Images/verticalFifthShip.png"
+            id="playerFifth"
+            class="player-ship"
+            draggable="true"
+          />
+        </div>
+      </section>
+      <section class="strategyPanel">
+        <img src="/Images/strategtPanelHeadline.png" class="headline" />
+        <div class="panel"></div>
+      </section>
+      <section class="buttons">
+        <button class="button" id="shuffleBtn"></button>
+        <button class="button" id="clearBtn"></button>
+        <button class="button hidden" id="rotateBtn"></button>
+        <button class="button hidden" id="playBtn"></button>
+      </section>
+    </main>
+  </body>
+</html>
