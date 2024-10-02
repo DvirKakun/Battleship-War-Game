@@ -4,7 +4,8 @@
   "description": "The Battleship War Game is a classic two-player strategy game in which players attempt to sink each other's fleet of ships. The game is played on two grids: one for the player’s own ships and one for targeting the opponent's ships. The objective is to locate and sink all of the opponent's ships before they can sink yours.",
   "scripts": {
     "start": "parcel ./Start_Screen/index.html ./Strategy_Panel/index.html ./Play_Game/index.html",
-    "build": "parcel build Start_Screen/index.html Strategy_Panel/index.html Play_Game/index.html --dist-dir ./dist"
+    "build": "parcel build Start_Screen/index.html Strategy_Panel/index.html Play_Game/index.html --dist-dir ./dist",
+    "postbuild": "cp _redirects dist/"
   },
   "author": "Dvir Kakun",
   "license": "ISC",
