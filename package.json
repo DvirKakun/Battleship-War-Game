@@ -5,11 +5,13 @@
   "scripts": {
     "start": "parcel ./Start_Screen/index.html ./Strategy_Panel/index.html ./Play_Game/index.html",
     "build": "parcel build Start_Screen/index.html Strategy_Panel/index.html Play_Game/index.html --dist-dir ./dist",
-    "postbuild": "cp _redirects dist/"
+    "postbuild": "copyfiles _redirects dist && rimraf _redirects"
   },
   "author": "Dvir Kakun",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.12.0"
+    "copyfiles": "^2.4.1",
+    "parcel": "^2.12.0",
+    "rimraf": "^6.0.1"
   }
 }
