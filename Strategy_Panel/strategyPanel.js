@@ -343,7 +343,7 @@ function play() {
     layout.classList.remove('hidden');
     layout.classList.add('fade-in');
     setTimeout(function () {
-        window.location.href = "/Play_Game/play.html";
+        window.location.href = "/Play_Game/index.html";
     }, 1000);
 }
 

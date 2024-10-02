@@ -87,7 +87,7 @@ newGameBtn.addEventListener('click', () => {
     layout.classList.remove('hidden');
     layout.classList.add('fade-in');
     setTimeout(function () {
-        window.location.href = "/Strategy_Panel/strategyPanel.html";
+        window.location.href = "/Strategy_Panel/index.html";
     }, 1000);
 });
 
