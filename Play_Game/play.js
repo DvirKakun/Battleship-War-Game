@@ -37,7 +37,7 @@ const shipsLengths = [3, 4, 4, 4, 5];
 let randomMove = [-1, 1];
 let move;
 let isTaken = 0;
-let turn = 0;  //if turn = 0 --> player turn so access needed for the computer ships data.
+let turn = 0;  //if turn = 0 --> player turn - so access needed for the computer ships data.
 let setPositionCell = null;
 let isHited = false;
 let hitDirection = null;
@@ -53,8 +53,6 @@ window.onload = function () {
     }, 1000);
 
 }
-
-
 
 const shipCellsById = JSON.parse(sessionStorage.getItem('shipCellsId'));
 const panelData = JSON.parse(sessionStorage.getItem('panelData'));
@@ -132,25 +130,6 @@ async function cellClick() {
     }
 }
 
-// computerCells.forEach(cell => {
-//     cell.addEventListener('mouseenter', () => {
-//         cell.classList.add('drag-over');
-//     });
-
-//     cell.addEventListener('mouseleave', () => {
-//         cell.classList.remove('drag-over');
-//     });
-
-//     cell.addEventListener('click', async () => {
-//         cell.classList.remove('drag-over');
-//         await makeShot(cell);
-//         if (counterDestroyed[turn] === shipsLengths.length) {
-//             gameOver();
-//         }
-
-//     })
-// });
-
 async function makeShot(cell) {
     let status = null;
     if (!cell.classList.contains('original')) {
@@ -170,8 +149,6 @@ async function makeShot(cell) {
         await delay(500);
 
         changeCellStatus(cell, cellStatus['flame']); //Flame animation
-
-
 
         let ship = cell.dataset.ship;
         let index = Object.keys(turnShipCells[turn]).indexOf(ship);
@@ -327,7 +304,6 @@ function createComputerPanel() {
     }
 }
 
-
 function shuffle() {
     computerShips.forEach(ship => {
         ship.style.pointerEvents = 'none';   // Make the ship goes to the background
@@ -406,9 +382,8 @@ function setComputerOnPanel(ship) {
     computerShipCells[ship.id] = tempCells;
     computerShipCells[ship.id].forEach(shipCell => {
         shipCell.classList.add('taken');
-
-
     }); //Mark the ship's cells as taken include frame
+
     tempCells = [];
 }
 

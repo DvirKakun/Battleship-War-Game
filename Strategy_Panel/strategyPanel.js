@@ -41,7 +41,6 @@ ships.forEach(ship => {
         if (prevShip) {
             shipCells[prevShip.id].forEach(shipCell => {
                 shipCell.classList.remove('current');
-                //shipCell.dataset.ship && (shipCell.removeAttribute('data-ship')); //Error
             });
         }
         curShip = ship;
@@ -67,26 +66,13 @@ ships.forEach(ship => {
             document.removeEventListener('mouseup', onMouseUp);         //remove all listeners for avoiding collapse
             panel.removeEventListener('mousemove', onMouseHover);
 
-            // cells.forEach(cell => {
-            //     cell.removeEventListener('mouseenter', onMouseHover)
-            //     cell.removeEventListener('mouseleave', onMouseLeave);
-            // });
-
             ships.forEach(ship => { ship.style.pointerEvents = 'auto' });   // Make the ship goes to the foreground
 
             let set = placeShip(ship);  //Place the ship
             set === 'panel' && (rotateBtn.classList.remove('hidden'), shipCells[curShip.id].forEach(shipCell => {
                 shipCell.classList.add('current'); //Allow rotate after dragging ship and mark the current ship frame
             }));
-            // if (set === 'panel') {
-            //     rotateBtn.classList.remove('hidden');   
 
-            //     shipCells[curShip.id].forEach(shipCell => {
-            //         shipCell.classList.add('current');
-            //     });
-
-            // }
-            //  if (container.children.length === 0) playBtn.classList.remove('hidden');
             container.children.length === 0 && playBtn.classList.remove('hidden');
 
         }
@@ -105,10 +91,7 @@ ships.forEach(ship => {
         document.addEventListener('mousemove', onMouseMove);
         document.addEventListener('mouseup', onMouseUp);
         panel.addEventListener('mousemove', onMouseHover);
-        //  panel.addEventListener('mouseleave', onMouseLeave);        // cells.forEach(cell => {
-        //     cell.addEventListener('mouseenter', onMouseHover)
-        //     cell.addEventListener('mouseleave', onMouseLeave);
-        // });
+
     });
 });
 
@@ -137,7 +120,6 @@ function getTempCells(curCell, ship, offset) {
     let shipLength = shipsLengths[index];
     offset ??= Math.floor(shipLength / 2);
     let direction = +ship.dataset.direction; //convert the direction into numeric
-    // let cellsArray = Array.from(cells);
     for (let i = 0; i < shipLength; i++) { //find the cells for the ship 
         tempCells.push(
             cells.find(cell => cell.id === `player-cell-${row + (i - offset) * direction}-${col + (i - offset) * +!direction}`)
@@ -209,11 +191,7 @@ function setOnPanel(ship) {
         // shipCell.dataset.ship = ship.id;
         return shipCell;
     });
-    // shipCells[ship.id] = tempCells;
-    // shipCells[ship.id].forEach(shipCell => {
-    //     shipCell.classList.add('taken');
-    //     shipCell.dataset.ship = ship.id;
-    // }); 
+
     tempCells = [];
 }
 
@@ -241,11 +219,7 @@ function removeFrame(ship) {
         if (shipId !== ship.id)
             otherCells.push(...cells);
     }
-    // for (let id in shipCells) {
-    //     if (id !== ship.id) {
-    //         otherCells.push(...shipCells[id]);
-    //     }
-    // }
+
     shipCells[ship.id].forEach(shipCell => { //Remove the taken cells at the moment ship is clicked
         shipCell.classList.remove('current');
 
@@ -271,11 +245,6 @@ function rotate() {
         status === 'panel' && shipCells[curShip.id].forEach(shipCell => {
             shipCell.classList.add('current');
         });
-        // if (status === 'panel') {
-        //     shipCells[curShip.id].forEach(shipCell => {
-        //         shipCell.classList.add('current');
-        //     });
-        // }
 
     }
 }
@@ -284,22 +253,6 @@ function clear() {
     ships.forEach(ship => {
         ship.parentElement === panel && backToContainer(ship);
     });
-    // Object.keys(shipCells).forEach(ship => {
-    //     console.log((shipCells[ship]));
-
-    //     shipCells[ship].forEach(shipCell => {
-    //         console.log(ship);
-    //         shipCell.classList.remove('taken');
-    //         shipCell.classList.remove('original');
-    //         shipCell.dataset.ship = '';
-    //     });
-    //     shipCells[ship] = [];
-    // });
-    // curShip = null;
-    // currentCell = null;
-    // setPositionCell = null;
-    // shipSize = null;
-
 }
 
 function shuffle() {
