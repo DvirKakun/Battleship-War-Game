@@ -255,8 +255,13 @@ function clear() {
     });
 }
 
-function shuffle() {
-    ships.forEach(ship => {
+const waitForImageToLoad = function (ship) {
+    return new Promise((resolve, reject) => {
+        ship.onload = () => resolve();  // Resolve the promise when the image loads
+    });
+}
+async function shuffle() {
+    for (const ship of ships) {
         let set;
         do {
             let randCellNumber = Math.floor(Math.random() * rows * cols);
@@ -265,12 +270,15 @@ function shuffle() {
             let strDirection = directions[randDirection];
             ship.dataset.direction = randDirection;
             ship.src = Images[`${strDirection}${ship.id.charAt(6).toUpperCase() + ship.id.slice(7)}Ship`];
+
+            await waitForImageToLoad(ship);
+
             getTempCells(randCell, ship);
             prepareShip(ship);
             set = placeShip(ship);
         }
         while (set === 'container');
-    });
+    }
     playBtn.classList.remove('hidden');
 }
 
