@@ -27,7 +27,6 @@ const changeTurn = [computerTurn, playerTurn];
 const rows = 15, cols = 15;
 const computerCells = [];
 let tempCells = [];
-let numbersList = [];
 const directions = ['horizontal', 'vertical'];
 const computerShipsHitedAmount = [0, 0, 0, 0, 0];
 const playerShipsHitedAmount = [0, 0, 0, 0, 0];

@@ -19,7 +19,7 @@ const ships = document.querySelectorAll('.player-ship');
 const shipsLengths = [3, 4, 4, 4, 5];
 const directions = ['horizontal', 'vertical'];
 let currentCell = null, setPositionCell = null, isTaken = 0, prevShip = null, curShip = null, tempCells = [];
-let panelSize = panel.getBoundingClientRect(), shipSize = null;
+let shipSize = null;
 let x, y;
 
 window.onload = function () {
