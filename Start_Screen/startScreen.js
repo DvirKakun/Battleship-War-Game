@@ -1,4 +1,3 @@
-
 const startBtn = document.querySelector('.startGameBtn');
 const layout = document.querySelector('.layout');
 const moveToStrategyPanel = function () {

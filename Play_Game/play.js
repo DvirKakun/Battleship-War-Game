@@ -152,7 +152,17 @@ async function makeShot(cell) {
         let ship = cell.dataset.ship;
         let index = Object.keys(turnShipCells[turn]).indexOf(ship);
         shipsHitedAmount[turn][index]++;
-        if (shipsHitedAmount[turn][index] === shipsLengths[index]) {
+
+        if (turn === 0) {  //Add flame affect in the computer fleet
+            const markup = `
+                   <img
+                    src= ${Images.flame}
+                  />
+                     `;
+            document.querySelector(`.${ship}StatusContainer`).insertAdjacentHTML('beforeend', markup);
+        }
+
+        if (shipsHitedAmount[turn][index] === shipsLengths[index]) {   //Make the explosion affect
             status = 'destroyed';
             counterDestroyed[turn]++;
 
@@ -164,6 +174,11 @@ async function makeShot(cell) {
                         changeCellStatus(cell, cellStatus['destroyed']);
                     }, 700);
                 }
+            }
+
+            if (turn === 0) {
+                document.querySelector(`.${ship}StatusContainer`).innerHTML = '';
+                document.getElementById(`${ship}Status`).src = Images[`${ship}Sunk`];
             }
 
             ship = document.getElementById(`${ship}`);
