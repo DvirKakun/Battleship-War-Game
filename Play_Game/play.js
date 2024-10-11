@@ -7,9 +7,10 @@ const playerVerticalTargetLine = document.querySelector('.playerVerticalTargetLi
 const playerHorizontalTargetLine = document.querySelector('.playerHorizontalTargetLine');
 const computerShips = document.querySelectorAll('.computer-ship');
 const overlay = document.querySelector('.overlay ');
-const winnerDialog = document.querySelector('.winnerDialog ');
+const winnerDialog = document.querySelector('.winnerDialog');
 const winnerImg = document.getElementById('winner');
-const newGameBtn = document.getElementById('newGame');
+const newGameBtn = document.querySelectorAll('.newGame');
+const closeBtn = document.querySelector('.closeButton');
 
 const playerShipCells = { playerFirst: [], playerSecond: [], playerThird: [], playerFourth: [], playerFifth: [] };
 const computerShipCells = { computerFirst: [], computerSecond: [], computerThird: [], computerFourth: [], computerFifth: [] };
@@ -79,13 +80,23 @@ setPlayerOnPanel();
 createComputerPanel();
 shuffle();
 
-newGameBtn.addEventListener('click', () => {
-    winnerDialog.close();
-    layout.classList.remove('hidden');
-    layout.classList.add('fade-in');
-    setTimeout(function () {
-        window.location.href = "/Strategy_Panel/index.html";
-    }, 1000);
+newGameBtn.forEach(btn => {
+    btn.addEventListener('click', () => {
+        winnerDialog.close();
+        layout.classList.remove('hidden');
+        layout.classList.add('fade-in');
+        setTimeout(function () {
+            window.location.href = "/Strategy_Panel/index.html";
+        }, 1000);
+    });
+});
+
+[closeBtn, overlay].forEach(btn => {
+    btn.addEventListener('click', () => {
+        winnerDialog.classList.remove('displaySetting');
+        winnerDialog.close();
+        overlay.classList.add('hidden');
+    });
 });
 
 computerPanel.addEventListener('mousemove', (e) => {   //Target animation
@@ -236,6 +247,11 @@ async function computerTurn() {
         }
 
         if (counterDestroyed[turn] === shipsLengths.length) {
+            computerShips.forEach(ship => {
+                if (!computerShipCells[ship.id][0].classList.contains('destroyed'))
+                    ship.classList.remove('hidden')
+            });
+
             gameOver();
             break;
         }
@@ -274,7 +290,7 @@ function gameOver() {
     winnerDialog.classList.add('displaySetting');
     winnerImg.src = Images[`Winner${turn}`];
 
-    winnerDialog.showModal();
+    winnerDialog.show();
 }
 
 function isCellAvailable(cell) {

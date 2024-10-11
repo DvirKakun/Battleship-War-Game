@@ -29,6 +29,7 @@
         </div>
       </section>
       <section class="computerFleet">
+        <button class="newGame">New Game</button>
         <div class="statusTitle">
           <img src="/Images/computerFleetTitle.png" />
         </div>
@@ -122,11 +123,12 @@
       </section>
     </main>
 
-    <div class="overlay hidden"></div>
-
-    <dialog class="winnerDialog">
-      <img id="winner" />
-      <button id="newGame">New Game</button>
-    </dialog>
+    <div class="overlay hidden">
+      <dialog class="winnerDialog">
+        <button class="closeButton">&times;</button>
+        <img id="winner" />
+        <button class="newGame">New Game</button>
+      </dialog>
+    </div>
   </body>
 </html>
