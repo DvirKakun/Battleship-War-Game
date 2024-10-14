@@ -34,6 +34,7 @@ const playerShipsHitedAmount = [0, 0, 0, 0, 0];
 const shipsHitedAmount = [computerShipsHitedAmount, playerShipsHitedAmount];
 const counterDestroyed = [0, 0];
 const shipsLengths = [3, 4, 4, 4, 5];
+let lengthsCopy = [...shipsLengths];
 let randomMove = [-1, 1];
 let move;
 let isTaken = 0;
@@ -43,6 +44,7 @@ let isHited = false;
 let hitDirection = null;
 let lastCellHited = null;
 let currentCell = null;
+let status = null;
 
 
 window.onload = function () {
@@ -79,6 +81,14 @@ Object.keys(shipCellsById).forEach(ship => { //Reconstruct the cells for each sh
 setPlayerOnPanel();
 createComputerPanel();
 shuffle();
+
+// //Minimize the choices :
+// for (let i = 0; i <= 150; i++) {
+//     let randCellNumber = Math.floor(Math.random() * rows * cols);            //Choose random cell
+//     let cell = playerCells[randCellNumber];
+//     if (!cell.classList.contains('original'))
+//         changeCellStatus(cell, 'missed');
+// }
 
 newGameBtn.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -141,7 +151,6 @@ async function cellClick() {
 }
 
 async function makeShot(cell) {
-    let status = null;
     if (!cell.classList.contains('original')) {
         status = 'missed';
         changeCellStatus(cell, cellStatus['missed']);
@@ -190,6 +199,8 @@ async function makeShot(cell) {
             if (turn === 0) {
                 document.querySelector(`.${ship}StatusContainer`).innerHTML = '';
                 document.getElementById(`${ship}Status`).src = Images[`${ship}Sunk`];
+            } else {
+                lengthsCopy.splice(lengthsCopy.findIndex(len => len === shipsLengths[index]), 1);
             }
 
             ship = document.getElementById(`${ship}`);
@@ -199,7 +210,7 @@ async function makeShot(cell) {
 
         computerPanel.style.pointerEvents = ''; //Allow the player to shoot again
     }
-    return status;
+
 }
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -220,7 +231,6 @@ async function computerTurn() {
 
     await delay(1000);
 
-    let status;
     let cell;
 
     do {
@@ -231,11 +241,12 @@ async function computerTurn() {
 
         await delay(1000); //Let the locating done before make the shot
 
-        status = await makeShot(cell);
+        await makeShot(cell);
+
 
         if (status === 'hited') { //Ship hited
             let ship = document.getElementById(`${cell.dataset.ship}`);
-            hitDirection = isHited && +ship.dataset.direction; //if isHited = true --> hitDirection get direction
+            hitDirection = isHited && +ship.dataset.direction; //if isHited = true --> hitDirection get direction, else, hitDirection set to false
             isHited = true;
             lastCellHited = cell;
         }
@@ -294,7 +305,81 @@ function gameOver() {
 }
 
 function isCellAvailable(cell) {
-    return cell !== undefined && !cell.classList.contains('missed') && !cell.classList.contains('hited');
+    if (cell === undefined || cell.classList.contains('missed') || cell.classList.contains('hited')) return false;
+
+    const min = lengthsCopy[0];
+    const index = playerCells.indexOf(cell);
+
+    if (!isHited)
+        return checkIfCellMakeSense(cell, index, min);
+    if (isHited && hitDirection === false) { //Computer hit the ship but has not found yet the direction of the ship
+        console.log(cell);
+        const ship = lastCellHited.dataset.ship;
+        const shipIndex = Object.keys(turnShipCells[turn]).indexOf(ship);
+        const lastCellIndex = playerCells.indexOf(lastCellHited);
+        if (lastCellIndex + 1 === index || lastCellIndex - 1 === index) return checkHorizontally(cell, index, shipsLengths[shipIndex], 1); //If computer hit one cell so he need to check if the amount of available cells equal/greater than the current ship length - 1
+        if (lastCellIndex + cols === index || lastCellIndex - cols === index) return checkVertically(cell, index, shipsLengths[shipIndex], 1);
+    }
+    return true; //return true if computer knows the direction, it means that  the chosen cell is neccessarlly make sense and available 
+}
+
+function checkIfCellMakeSense(cell, index, min) { //Checks if there is enough cells to hit the current mininmum ship from the reciving cell horizontally or vertically 
+
+    return checkHorizontally(cell, index, min) || checkVertically(cell, index, min);
+
+}
+function checkHorizontally(cell, index, min, hitedAmount = 0) {
+    let amountHorizontalCellsAvailable = 1; //The current cell always count
+    let i = 1;
+
+    while (playerCells[index + i] && (index + i) % cols !== 0 && !playerCells[index + i].classList.contains('missed')) { //Check right side
+        if (!playerCells[index + i].classList.contains('hited'))
+            amountHorizontalCellsAvailable++;
+        i++;
+        if (amountHorizontalCellsAvailable >= min - hitedAmount) {
+            console.log(amountHorizontalCellsAvailable);
+            return true;
+        }
+    }
+    i = 1;
+    while (playerCells[index - i] && (index - i) % cols !== cols - 1 && !playerCells[index - i].classList.contains('missed')) { //Check left side
+        if (!playerCells[index - i].classList.contains('hited'))
+            amountHorizontalCellsAvailable++;
+        i++;
+        if (amountHorizontalCellsAvailable >= min - hitedAmount) {
+            console.log(amountHorizontalCellsAvailable);
+            return true;
+        }
+    }
+    console.log(amountHorizontalCellsAvailable);
+    return false;
+}
+
+function checkVertically(cell, index, min, hitedAmount = 0) {
+    let amountVerticalCellsAvailable = 1;
+    let j = 1;
+
+    while (playerCells[index + (j * rows)] && !playerCells[index + (j * rows)].classList.contains('missed')) { //Check up
+        if (!playerCells[index + (j * rows)].classList.contains('hited'))
+            amountVerticalCellsAvailable++;
+        j++;
+        if (amountVerticalCellsAvailable >= min - hitedAmount) {
+            console.log(amountVerticalCellsAvailable);
+            return true;
+        }
+    }
+    j = 1;
+    while (playerCells[index - (j * rows)] && !playerCells[index - (j * rows)].classList.contains('missed')) { //Check down
+        if (!playerCells[index - (j * rows)].classList.contains('hited'))
+            amountVerticalCellsAvailable++;
+        j++;
+        if (amountVerticalCellsAvailable >= min - hitedAmount) {
+            console.log(amountVerticalCellsAvailable);
+            return true;
+        }
+    }
+    console.log(amountVerticalCellsAvailable)
+    return false;
 }
 
 function locateCell(randCell) {
