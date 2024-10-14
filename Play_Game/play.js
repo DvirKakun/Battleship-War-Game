@@ -313,7 +313,6 @@ function isCellAvailable(cell) {
     if (!isHited)
         return checkIfCellMakeSense(cell, index, min);
     if (isHited && hitDirection === false) { //Computer hit the ship but has not found yet the direction of the ship
-        console.log(cell);
         const ship = lastCellHited.dataset.ship;
         const shipIndex = Object.keys(turnShipCells[turn]).indexOf(ship);
         const lastCellIndex = playerCells.indexOf(lastCellHited);
@@ -337,7 +336,6 @@ function checkHorizontally(cell, index, min, hitedAmount = 0) {
             amountHorizontalCellsAvailable++;
         i++;
         if (amountHorizontalCellsAvailable >= min - hitedAmount) {
-            console.log(amountHorizontalCellsAvailable);
             return true;
         }
     }
@@ -347,11 +345,9 @@ function checkHorizontally(cell, index, min, hitedAmount = 0) {
             amountHorizontalCellsAvailable++;
         i++;
         if (amountHorizontalCellsAvailable >= min - hitedAmount) {
-            console.log(amountHorizontalCellsAvailable);
             return true;
         }
     }
-    console.log(amountHorizontalCellsAvailable);
     return false;
 }
 
@@ -364,7 +360,6 @@ function checkVertically(cell, index, min, hitedAmount = 0) {
             amountVerticalCellsAvailable++;
         j++;
         if (amountVerticalCellsAvailable >= min - hitedAmount) {
-            console.log(amountVerticalCellsAvailable);
             return true;
         }
     }
@@ -374,11 +369,9 @@ function checkVertically(cell, index, min, hitedAmount = 0) {
             amountVerticalCellsAvailable++;
         j++;
         if (amountVerticalCellsAvailable >= min - hitedAmount) {
-            console.log(amountVerticalCellsAvailable);
             return true;
         }
     }
-    console.log(amountVerticalCellsAvailable)
     return false;
 }
 
