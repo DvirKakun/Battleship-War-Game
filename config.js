@@ -24,6 +24,8 @@ import flame from "url:./Images/flame.gif"
 import eyal from "url:./Images/Eyal.png";
 import clear from "url:./Images/clear.png";
 
+import vroom from "url:./Sounds/vroomSound.m4a";
+
 export const Images = {
     verticalFirstShip,
     verticalSecondShip,
@@ -51,3 +53,7 @@ export const Images = {
     eyal,
     clear,
 };
+
+export const Sounds = {
+    vroom,
+}

@@ -1,4 +1,5 @@
 import { Images } from "../config.js";
+import { Sounds } from "../config.js";
 
 const layout = document.querySelector('.layout');
 const panel = document.querySelector('.panel');
@@ -310,9 +311,16 @@ function play() {
 
 let timer;
 let easterEggActive = 0;
+const audio = new Audio(Sounds["vroom"]);
 function eyalEasterEgg() {
     timer = setTimeout(() => {
-        easterEggActive ? clearBtn.style.backgroundImage = `url(${Images["clear"]})` : clearBtn.style.backgroundImage = `url(${Images["eyal"]})`;
+        if (easterEggActive) {
+            clearBtn.style.backgroundImage = `url(${Images["clear"]})`
+            audio.pause();
+        } else {
+            clearBtn.style.backgroundImage = `url(${Images["eyal"]})`;
+            audio.play();
+        }
         easterEggActive = +!easterEggActive;
     }, 3000);
 }
