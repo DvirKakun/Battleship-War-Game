@@ -21,6 +21,9 @@ import Winner1 from "url:./Images/Winner1.png";
 
 import flame from "url:./Images/flame.gif"
 
+import eyal from "url:./Images/Eyal.png";
+import clear from "url:./Images/clear.png";
+
 export const Images = {
     verticalFirstShip,
     verticalSecondShip,
@@ -44,4 +47,7 @@ export const Images = {
     Winner1,
 
     flame,
+
+    eyal,
+    clear,
 };

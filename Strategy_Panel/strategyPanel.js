@@ -308,7 +308,22 @@ function play() {
     }, 1000);
 }
 
+let timer;
+let easterEggActive = 0;
+function eyalEasterEgg() {
+    timer = setTimeout(() => {
+        easterEggActive ? clearBtn.style.backgroundImage = `url(${Images["clear"]})` : clearBtn.style.backgroundImage = `url(${Images["eyal"]})`;
+        easterEggActive = +!easterEggActive;
+    }, 3000);
+}
+
+function releaseTimer() {
+    clearTimeout(timer);
+}
+
 shuffleBtn.addEventListener('click', shuffle);
 rotateBtn.addEventListener('click', rotate);
 clearBtn.addEventListener('click', clear);
+clearBtn.addEventListener('mousedown', eyalEasterEgg);
+clearBtn.addEventListener('mouseup', releaseTimer);
 playBtn.addEventListener('click', play);
