@@ -80,27 +80,7 @@ window.addEventListener('popstate', (event) => {
         if (state.status === 'solo') {
             window.location.href = '../Strategy_Panel/index.html';
         } else {
-            activeLoadingSpinner('Loading...');
-            get(winnerRef).then((snapshot) => {
-                //                if (!snapshot.exists()) {
-                if (state.status === 'host') {
-                    return set(winnerRef, 'guest')
-                }
-                else {
-                    return set(winnerRef, 'host');
-                }
-                //     }
-                //  else {
-                return null;
-                //  }
-            }).then((result) => {
-                if (result) {
-                    deactiveLoadingSpinner();
-                }
-                window.location.href = '../Start_Screen/index.html';
-
-            }).catch((error) => console.error(error));
-
+            window.location.href = '../Start_Screen/index.html';
         }
     }
 });
