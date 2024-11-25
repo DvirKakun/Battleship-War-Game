@@ -22,7 +22,7 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url(/Images/strategtPanelBackground.png);
+  background-image: url(/Images/strategyPanelBackground.png);
   filter: blur(2px);
   z-index: 0;
 }
