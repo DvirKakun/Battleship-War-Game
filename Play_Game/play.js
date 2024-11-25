@@ -63,7 +63,7 @@ let roomObjRef;
 let hostShipDestroyedRef, guestShipDestroyedRef;
 let hostCellsRef, guestCellsRef;
 let winnerRef;
-let selfRef, opponentRef;
+let selfRef;
 
 history.pushState({ page: 'play' }, '', '/index.html');
 
@@ -116,7 +116,6 @@ if (state.status !== 'solo') {
     guestShipDestroyedRef = ref(database, `rooms/${state.roomName}/players/guest/shipDestroyed`);
     winnerRef = ref(database, `rooms/${state.roomName}/winner`);
     selfRef = ref(database, `rooms/${state.roomName}/players/${state.status}`);
-    state.status === 'guest' ? opponentRef = hostRef : opponentRef = guestRef;
 
     get(hostRef)
         .then((snapshot) => {
@@ -364,7 +363,6 @@ function startGame() {
     });
 
     playAgainBtn.addEventListener('click', () => {
-        isWantToPlayAgain = true;
 
         playAgainBtn.style.backgroundImage = 'linear-gradient(to top left,  #808080, #404040)';
         playAgainBtn.style.pointerEvents = 'none';
