@@ -324,7 +324,7 @@ function startGame() {
 
         onChildChanged(roomObjRef, (snapshot) => {
             let key = snapshot.key;
-            changedData = snapshot.val();
+            let changedData = snapshot.val();
             if (key === 'turn') {
                 if (state.status === changedData) changeTurn[turn]();
             }
@@ -756,6 +756,7 @@ function startGame() {
         } else {
             let opponentCellsRef;
             let oppnenetCellsPerShipRef;
+            let opponentShipsDirectionsRef;
             if (state.status === 'host') {
                 opponentCellsRef = ref(database, `rooms/${state.roomName}/players/guest/cells`);
                 oppnenetCellsPerShipRef = ref(database, `rooms/${state.roomName}/players/guest/cellsPerShip`);
