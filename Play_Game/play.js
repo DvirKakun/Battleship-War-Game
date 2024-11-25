@@ -56,12 +56,12 @@ let lastCellHited = null;
 let currentCell = null;
 let status = null;
 let isGameStarted = false;
-let isWantToPlayAgain = false;
 
 let hostRef, hostData;
 let guestRef, guestData;
 let roomObjRef;
 let hostShipDestroyedRef, guestShipDestroyedRef;
+let hostCellsRef, guestCellsRef;
 let winnerRef;
 let selfRef, opponentRef;
 
