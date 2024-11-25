@@ -1,7 +1,12 @@
-import { Images } from "../config.js";
+import { Images, Sounds, database } from "../config.js";
 import { Sounds } from "../config.js";
+import { database } from "../config.js";
+import { ref, update, get } from "firebase/database";
+
 
 const layout = document.querySelector('.layout');
+const overlay = document.querySelector('.overlay');
+const loadingContentDialog = document.querySelector('.loading-content');
 const panel = document.querySelector('.panel');
 const front = document.querySelector('.front');
 const container = document.querySelector('.container');
@@ -9,6 +14,7 @@ const shuffleBtn = document.getElementById('shuffleBtn');
 const rotateBtn = document.getElementById('rotateBtn');
 const clearBtn = document.getElementById('clearBtn');
 const playBtn = document.getElementById('playBtn');
+const toast = document.querySelector('.toast');
 
 let rows = 15;
 let cols = 15;
@@ -23,6 +29,10 @@ let currentCell = null, setPositionCell = null, isTaken = 0, prevShip = null, cu
 let shipSize = null;
 let x, y;
 
+history.replaceState({ page: 'strategy_panel' }, '', '/index.html');
+
+const state = JSON.parse(sessionStorage.getItem('state'));
+
 window.onload = function () {
     layout.classList.add('fade-out');
     setTimeout(() => {
@@ -30,6 +40,13 @@ window.onload = function () {
         layout.classList.remove('fade-out');
     }, 1000);
 }
+
+window.addEventListener('popstate', (event) => {
+    if (event.state?.page === 'strategy_panel') {
+        window.location.href = '../Start_Screen/index.html';
+    }
+});
+
 
 createStrategyPanel();
 
@@ -283,6 +300,55 @@ async function shuffle() {
     playBtn.classList.remove('hidden');
 }
 
+const activeLoadingSpinner = function () {
+    overlay.classList.remove('hidden');
+    loadingContentDialog.classList.add('displaySetting');
+    loadingContentDialog.show();
+}
+
+const deactiveLoadingSpinner = function () {
+
+    overlay.classList.add('hidden');
+    loadingContentDialog.classList.remove('displaySetting');
+    loadingContentDialog.close();
+}
+
+const makeToastAnimation = function () {
+    toast.classList.remove('hidden');
+    gsap.fromTo(
+        toast,
+        { y: 50, opacity: 0 },
+        {
+            y: -130,
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out",
+            onComplete: () => {
+                // Fade out after 2 seconds
+                gsap.to(toast, {
+                    opacity: 0,
+                    duration: 0.5,
+                    delay: 2,
+                    y: 50,
+                    ease: "power2.in",
+                    onComplete: () => {
+                        toast.classList.add('hidden');
+                    },
+                });
+            },
+        }
+    );
+}
+
+
+const moveToPlayScreen = function () {
+    layout.classList.remove('hidden');
+    layout.classList.add('fade-in');
+    setTimeout(function () {
+        window.location.href = "/Play_Game/index.html";
+    }, 1000);
+}
+
 function play() {
     const childrenHTML = [];
     const serializedShipCells = {
@@ -301,12 +367,31 @@ function play() {
     Object.keys(shipCells).forEach(ship => { shipCells[ship].forEach(cell => { serializedShipCells[ship].push(cell.id) }) });
     sessionStorage.setItem('shipCellsId', JSON.stringify(serializedShipCells));
 
+    if (state.status === 'host' || state.status === 'guest') {
+        activeLoadingSpinner();
 
-    layout.classList.remove('hidden');
-    layout.classList.add('fade-in');
-    setTimeout(function () {
-        window.location.href = "/Play_Game/index.html";
-    }, 1000);
+        const roomObjRef = ref(database, `/rooms/${state.roomName}`);
+        get(roomObjRef).then((snapshot) => {
+            const roomData = snapshot.val();
+            if (roomData.locked) {
+                deactiveLoadingSpinner();
+                makeToastAnimation();
+                return Promise.reject();
+            } else {
+                const playerObjectRef = ref(database, `/rooms/${state.roomName}/players/${state.status}`);
+                return update(playerObjectRef, {
+                    isReady: true
+                });
+            }
+        }).then(() => {
+            deactiveLoadingSpinner();
+            moveToPlayScreen();
+        }).catch((error) => {
+            console.log(error); //TODO: Create network error
+        });
+    } else {
+        moveToPlayScreen();
+    }
 }
 
 let timer;

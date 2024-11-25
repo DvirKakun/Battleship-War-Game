@@ -7,6 +7,10 @@
     <title>Battleship Game</title>
     <link rel="stylesheet" href="playStyle.css" />
     <link rel="shortcut icon" type="image/png" href="/Images/warshipIcon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <script type="module" src="play.js"></script>
   </head>
@@ -16,102 +20,107 @@
     <div class="background"></div>
     <main class="front">
       <section class="player">
+        <div class="quitGameContainer hidden">
+          <button class="quitGame">
+            <img src="/Images/exit.png" />
+          </button>
+        </div>
         <div class="playerTitle">
           <img src="/Images/playerHeadline.png" />
         </div>
         <div class="playerPanel panel deactive">
           <img
-            class="computerHorizontalTargetLine horizontalTargetLine target hidden"
+            class="opponentHorizontalTargetLine horizontalTargetLine target hidden"
           />
           <img
-            class="computerVerticalTargetLine verticalTargetLine target hidden"
+            class="opponentVerticalTargetLine verticalTargetLine target hidden"
           />
         </div>
       </section>
-      <section class="computerFleet">
+      <section class="opponentFleet">
         <button class="newGame">New Game</button>
         <div class="statusTitle">
-          <img src="/Images/computerFleetTitle.png" />
+          <img src="/Images/opponentFleetTitle.png" />
         </div>
-        <div class="computerFleetContainer">
-          <div class="computerFleetCell">
+        <div class="opponentFleetContainer">
+          <div class="opponentFleetCell">
             <img
               src="/Images/verticalFirstShip.png"
-              id="computerFirstStatus"
-              class="computer-status-ship"
+              id="opponentFirstStatus"
+              class="opponent-status-ship"
             />
-            <div class="computerFirstStatusContainer computerFleetStatus"></div>
+            <div class="opponentFirstStatusContainer opponentFleetStatus"></div>
           </div>
-          <div class="computerFleetCell">
+          <div class="opponentFleetCell">
             <img
               src="/Images/verticalSecondShip.png"
-              id="computerSecondStatus"
-              class="computer-status-ship"
+              id="opponentSecondStatus"
+              class="opponent-status-ship"
             />
             <div
-              class="computerSecondStatusContainer computerFleetStatus"
+              class="opponentSecondStatusContainer opponentFleetStatus"
             ></div>
           </div>
 
-          <div class="computerFleetCell">
+          <div class="opponentFleetCell">
             <img
               src="/Images/verticalThirdShip.png"
-              id="computerThirdStatus"
-              class="computer-status-ship"
+              id="opponentThirdStatus"
+              class="opponent-status-ship"
             />
-            <div class="computerThirdStatusContainer computerFleetStatus"></div>
+            <div class="opponentThirdStatusContainer opponentFleetStatus"></div>
           </div>
 
-          <div class="computerFleetCell">
+          <div class="opponentFleetCell">
             <img
               src="/Images/verticalFourthShip.png"
-              id="computerFourthStatus"
-              class="computer-status-ship"
+              id="opponentFourthStatus"
+              class="opponent-status-ship"
             />
             <div
-              class="computerFourthStatusContainer computerFleetStatus"
+              class="opponentFourthStatusContainer opponentFleetStatus"
             ></div>
           </div>
 
-          <div class="computerFleetCell">
+          <div class="opponentFleetCell">
             <img
               src="/Images/verticalFifthShip.png"
-              id="computerFifthStatus"
-              class="computer-status-ship"
+              id="opponentFifthStatus"
+              class="opponent-status-ship"
             />
-            <div class="computerFifthStatusContainer computerFleetStatus"></div>
+            <div class="opponentFifthStatusContainer opponentFleetStatus"></div>
           </div>
         </div>
       </section>
-      <section class="computer">
-        <div class="computerTitle">
-          <img src="/Images/computerHeadline.png" class="title" />
+      <section class="opponent">
+        <div class="opponentTitle">
+          <img src="/Images/opponentHeadline.png" class="title" />
         </div>
-        <div class="computerPanel panel">
+        <div class="opponentPanel panel">
           <img
             src="/Images/verticalFirstShip.png"
-            id="computerFirst"
-            class="computer-ship hidden"
+            id="opponentFirst"
+            class="opponent-ship hidden"
           />
           <img
             src="/Images/verticalSecondShip.png"
-            id="computerSecond"
-            class="computer-ship hidden"
+            id="opponentSecond"
+            class="opponent-ship hidden"
           />
           <img
             src="/Images/verticalThirdShip.png"
-            id="computerThird"
-            class="computer-ship hidden"
+            id="opponentThird"
+            class="opponent-ship hidden"
           />
           <img
             src="/Images/verticalFourthShip.png"
-            id="computerFourth"
-            class="computer-ship hidden"
+            id="opponentFourth"
+            class="opponent-ship hidden"
           />
           <img
             src="/Images/verticalFifthShip.png"
-            id="computerFifth"
-            class="computer-ship hidden"
+            id="opponentFifth"
+            class="opponent-ship hidden"
           />
           <img
             class="playerHorizontalTargetLine horizontalTargetLine target hidden"
@@ -127,7 +136,17 @@
       <dialog class="winnerDialog">
         <button class="closeButton">&times;</button>
         <img id="winner" />
-        <button class="newGame">New Game</button>
+        <div class="buttonsContainer">
+          <button class="btn newGame">New Game</button>
+          <button class="btn playAgain hidden">Play Again</button>
+        </div>
+      </dialog>
+    </div>
+
+    <div class="spinner-overlay hidden">
+      <dialog class="loading-content">
+        <div class="spinner"></div>
+        <p>Waiting for the second player...</p>
       </dialog>
     </div>
   </body>

@@ -7,7 +7,11 @@
     <title>Battleship Game - Strategy Panel</title>
     <link rel="stylesheet" href="strategyPanelStyle.css" />
     <link rel="shortcut icon" type="image/png" href="/Images/warshipIcon.png" />
-    <script type="module" src="strategyPanel.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ></script>
+    <script defer type="module" src="strategyPanel.js"></script>
   </head>
 
   <body>
@@ -59,5 +63,14 @@
         <button class="button hidden" id="playBtn"></button>
       </section>
     </main>
+
+    <div class="overlay hidden">
+      <dialog class="loading-content">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </dialog>
+    </div>
+
+    <div class="toast hidden">Room is locked</div>
   </body>
 </html>

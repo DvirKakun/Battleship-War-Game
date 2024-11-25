@@ -7,8 +7,16 @@
     <title>Battleship Game - Start</title>
     <link rel="stylesheet" href="startScreenStyle.css" />
     <link rel="shortcut icon" type="image/png" href="/Images/warshipIcon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&family=Rajdhani:wght@400;600&family=Orbitron:wght@400;700&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
 
-    <script defer src="startScreen.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ></script>
+    <script type="module" defer src="startScreen.js"></script>
   </head>
 
   <body>
@@ -16,5 +24,28 @@
     <div class="logo"></div>
     <div class="layout hidden"></div>
     <button class="startGameBtn"></button>
+
+    <div class="overlay hidden">
+      <dialog class="modeDialog">
+        <!-- <h1 class="game-title">
+          Game PIN: <input class="game-pin"></input>
+        </h1>
+        <button class="playBtn button">PLAY</button>
+        <button class="backBtn">&larr;</button> -->
+
+        <button class="soloBtn button">Solo Play</button>
+        <button class="hostRoomBtn button">Host a Game</button>
+        <button class="joinRoomBtn button">Join a Game</button>
+
+        <button class="closeButton">&times;</button>
+      </dialog>
+    </div>
+
+    <div class="spinner-overlay hidden">
+      <dialog class="loading-content">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </dialog>
+    </div>
   </body>
 </html>

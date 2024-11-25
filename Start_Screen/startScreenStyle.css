@@ -99,6 +99,174 @@ body {
   z-index: 4;
 }
 
+.overlay,
+.spinner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #06060638;
+  backdrop-filter: blur(2px);
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modeDialog {
+  position: absolute;
+  margin: auto;
+  width: 600px;
+  height: 400px;
+  padding: 2rem;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.15
+  ); /* Semi-transparent background for glass effect */
+  border-radius: 40px;
+  border: 3px solid rgba(190, 239, 255, 0.3); /* Subtle border to enhance glassmorphism */
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  align-items: center;
+  justify-content: center;
+  z-index: 4000;
+  gap: 10px;
+  animation: slideDown 1s ease forwards;
+}
+
+.closeButton {
+  position: absolute;
+  background: none;
+  top: 10%;
+  left: 90%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid rgba(0, 0, 0, 0.6); /* Soft white border for better definition */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(23, 24, 24, 0.5); /* Glow and shadow for a 3D effect */
+  transition: all 0.1s;
+}
+.closeButton:hover,
+.backBtn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(5, 5, 5, 0.6);
+}
+
+.backBtn {
+  position: absolute;
+  background: none;
+  top: 10%;
+  left: 5%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 4px solid rgba(0, 0, 0, 0.6); /* Soft white border for better definition */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(23, 24, 24, 0.5); /* Glow and shadow for a 3D effect */
+  transition: all 0.1s;
+}
+
+.button {
+  background-image: linear-gradient(to top left, #3b34bf, #9195ed);
+  border: 0;
+  width: 500px;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Poppins', 'Inter', 'Nunito', -apple-system, system-ui,
+    'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif;
+
+  font-size: 35px;
+  font-weight: 600;
+  outline: 0;
+  margin-top: 5px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.1s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+  border: 4px solid rgba(255, 255, 255, 0.6); /* Soft white border for better definition */
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(0, 150, 255, 0.5); /* Glow and shadow for a 3D effect */
+}
+
+.button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(0, 150, 255, 0.6);
+}
+
+.game-title {
+  height: 30%;
+  font-size: 35px;
+  font-weight: bold;
+  font-family: 'Orbitron', sans-serif;
+  color: #000000;
+  text-align: center;
+  margin: 0;
+}
+
+.game-pin {
+  font-size: 35px;
+  color: #193b61; /* A highlight color for the PIN */
+  font-weight: 700;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  bottom: -10%; /* Start off the screen */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.loading-content {
+  position: absolute;
+  margin: auto;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 5000;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #3498db; /* Blue spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+/* Spinner keyframes */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.displaySettings {
+  display: flex;
+  flex-direction: column;
+}
+
 .hidden {
   display: none;
 }

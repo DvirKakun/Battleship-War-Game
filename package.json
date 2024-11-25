@@ -11,7 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "parcel": "^2.12.0",
+    "parcel": "^2.13.0",
+    "process": "^0.11.10",
     "rimraf": "^6.0.1"
+  },
+  "dependencies": {
+    "firebase": "^11.0.2"
   }
 }
