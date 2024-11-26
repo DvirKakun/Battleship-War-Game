@@ -130,7 +130,7 @@ const changeMarkup = function () {
                 deactiveLoadingSpinner();
                 moveToStrategyPanel(); //Start the game
             }).catch((error) => {
-                console.log(error); //TODO: Create network error
+                console.error(error); //TODO: Create network error
                 toast.textContent = `Error adding new room: ${error}`;
                 makeToastAnimation(toast);
             });
@@ -151,7 +151,6 @@ const changeMarkup = function () {
                 roomName = `room-${roomNumber}`;
                 if (!Object.hasOwn(roomsObject, roomName)) {
                     toast.textContent = 'Room does not exists';
-                    console.log("dsadas");
                     makeToastAnimation(toast);
                     return Promise.reject();
                 } else if (roomsObject[roomName].currentAmountOfPlayersInTheRoom == 2) {
@@ -168,7 +167,7 @@ const changeMarkup = function () {
                 deactiveLoadingSpinner();
                 moveToStrategyPanel();
             }).catch((error) => {
-                console.log(error); //TODO: Create network error
+                console.error(error); //TODO: Create network error
 
             });
 

@@ -243,7 +243,7 @@ function playAgain() {
         }, 1000);
 
     }).catch((error) => {
-        console.log(error); //TODO: Create network error
+        console.error(error); //TODO: Create network error
     });
 }
 

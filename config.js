@@ -26,7 +26,6 @@ const auth = getAuth(app);
 signInWithEmailAndPassword(auth, "dvireteui1@gmail.com", "dk0524334898")
     .then((userCredential) => {
         const user = userCredential.user;
-        console.log("Authenticated as:", user.uid);
     })
     .catch((error) => {
         console.error("Authentication failed:", error.message);
